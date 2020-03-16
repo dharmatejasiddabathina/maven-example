@@ -2,10 +2,31 @@ node{
    stage('SCM Checkout'){
       git 'https://github.com/dharmatejasiddabathina/maven-example.git'
    }
+    parameters {
+        
+        booleanParam(name: 'CODE_SCANS_REQUIRED', defaultValue: false, description: 'Execute Code Scans')
+    }
+   
    
    stage('Compile-Package'){
 	   //def mvnHome = tool name: 'MAVEN', type: 'maven'
            //bat "{mvnHome}/bin/mvn package"
    bat 'mvn package'
    }
+   stage("Code Quality Scanning") {
+            when {
+                environment name: 'CODE_SCANS_REQUIRED', value: 'true'
+            }
+            steps {
+		        
+                    withSonarQubeEnv(env.sonarHome= tool name: 'sonarscanner-3.0.3', type: 'hudson.plugins.sonar.SonarRunnerInstallation') {
+                      sh "${sonarHome}/bin/sonar-scanner \
+                          -Dsonar.projectName=hello\
+                          -Dsonar.java.binaries=build/classes \
+                          -Dsonar.sources=src/main -Dsonar.tests=src/test/java "
+                    }
+                
+			}
+        
+   
 }
