@@ -6,7 +6,8 @@ node{
    stage('Compile-Package'){
 	   //def mvnHome = tool name: 'MAVEN', type: 'maven'
           // bat "{mvnHome}/bin/mvn package"
-	   mvn -f "C://Users//Dharmateja.S//.jenkins//workspace//Test_Maven_master//hello//pom.xml"
-           bat 'mvn package'
+	    bat 'mvn -f C://Users//Dharmateja.S//.jenkins//workspace//Test_Maven_master//hello//pom.xml package'
+	   
+           //bat 'mvn package'
    }
 }
