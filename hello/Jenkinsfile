@@ -19,8 +19,7 @@
 		 git 'https://github.com/dharmatejasiddabathina/maven-example.git'
 		}
 		stage('Compile & Build '){
-		def evnMaven = tool name: 'MAVEN_HOME', type: 'maven'
-			sh "${evnMaven}/bin/mvn clean install"
+		sh 'mvn -B -DskipTests clean package' 
 		}
 	
 	}
