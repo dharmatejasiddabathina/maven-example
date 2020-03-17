@@ -12,8 +12,8 @@
   // }
 //}
 
-pipeline{
-	agent any{
+//pipeline{
+	node{
 	   stage('Scm Checkout')
 		{
 		 git 'https://github.com/dharmatejasiddabathina/maven-example.git'
@@ -24,4 +24,4 @@ pipeline{
 		}
 	
 	}
-}
+//}
